@@ -11,8 +11,5 @@ begin_main
 	call	writeString
 	nop
 
-	call	myfadd
-	nop
-
 	ret
 	restore

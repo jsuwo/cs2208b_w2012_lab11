@@ -6,7 +6,7 @@
 #
 # Targets:
 #
-#   asn4:  Build asn4 executable
+#   asn5:  Build asn5 executable
 #   clean: Remove all intermediary files
 #   realclean: Remove intermediary and executable files
 #
@@ -16,13 +16,16 @@ CC=gcc
 MP=m4
 CFLAGS=-c
 LFLAGS=-o
-DFLAGS=-g $(LFLAGS) 
-
-asn4: asn4.o myfadd.o stringio.o iofunc.o
-	$(CC) $(LFLAGS) asn4 $^
-
-debug: asn4.o myfadd.o stringio.o iofunc.o
-	$(CC) $(DFLAGS) asn4 $^
+OBJECTS=asn5.o \
+        read_bignum.o \
+        write_bignum.o \
+        get_bignum.o \
+        put_bignum.o \
+        add_bignum.o \
+        stringio.o
+        
+asn5: $(OBJECTS) iofunc.o
+	$(CC) $(LFLAGS) asn5 $^
 
 %.o: %.s
 	$(CC) $(CFLAGS) $<
@@ -32,9 +35,8 @@ debug: asn4.o myfadd.o stringio.o iofunc.o
 	$(MP) $< > $@
 
 realclean: clean
-	-rm asn4
+	-rm asn5
 
 clean:
-	-rm asn4.s myfadd.s
-	-rm asn4.o myfadd.o stringio.o
-
+	-rm asn5.s read_bignum.s write_bignum.s get_bignum.s put_bignum.s add_bignum.s
+	-rm $(OBJECTS)

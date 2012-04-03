@@ -3,29 +3,58 @@ MP=m4
 CFLAGS=-c
 LFLAGS=-o
 
-asn4: asn4.o myfadd.o stringio.o iofunc.o
-	$(CC) $(LFLAGS) asn4 asn4.o myfadd.o stringio.o iofunc.o
+asn5: asn5.o read_bignum.o write_bignum.o get_bignum.o put_bignum.o add_bignum.o stringio.o iofunc.o
+	$(CC) $(LFLAGS) asn5 asn5.o read_bignum.o write_bignum.o get_bignum.o put_bignum.o add_bignum.o stringio.o iofunc.o
 
 stringio.o: stringio.s
 	$(CC) $(CFLAGS) stringio.s
 
-asn4.o: asn4.s
-	$(CC) $(CFLAGS) asn4.s
+asn5.o: asn5.s
+	$(CC) $(CFLAGS) asn5.s
 
-asn4.s:	asn4.m
-	-rm asn4.s
-	$(MP) asn4.m > asn4.s
+asn5.s:	asn5.m
+	-rm asn5.s
+	$(MP) asn5.m > asn5.s
 
-myfadd.o: myfadd.s
-	$(CC) $(CFLAGS) myfadd.s
+read_bignum.o: read_bignum.s
+	$(CC) $(CFLAGS) read_bignum.s
 
-myfadd.s: myfadd.m
-	-rm myfadd.s
-	$(MP) myfadd.m > myfadd.s
+read_bignum.s: read_bignum.m
+	-rm read_bignum.s
+	$(MP) read_bignum.m > read_bignum.s
+
+write_bignum.o: write_bignum.s
+	$(CC) $(CFLAGS) write_bignum.s
+
+write_bignum.s: write_bignum.m
+	-rm write_bignum.s
+	$(MP) write_bignum.m > write_bignum.s
+
+get_bignum.o: get_bignum.s
+	$(CC) $(CFLAGS) get_bignum.s
+
+get_bignum.s: get_bignum.m
+	-rm get_bignum.s
+	$(MP) get_bignum.m > get_bignum.s
+
+put_bignum.o: put_bignum.s
+	$(CC) $(CFLAGS) put_bignum.s
+
+put_bignum.s: put_bignum.m
+	-rm put_bignum.s
+	$(MP) put_bignum.m > put_bignum.s
+
+add_bignum.o: add_bignum.s
+	$(CC) $(CFLAGS) add_bignum.s
+
+add_bignum.s: add_bignum.m
+	-rm add_bignum.s
+	$(MP) add_bignum.m > add_bignum.s
+
 
 realclean: clean
-	-rm asn4
+	-rm asn5
 
 clean:
-	-rm asn4.s myfadd.s
-	-rm asn4.o myfadd.o stringio.o
+	-rm asn5.s read_bignum.s write_bignum.s get_bignum.s put_bignum.s add_bignum.s
+	-rm asn5.o read_bignum.o write_bignum.o get_bignum.o put_bignum.o add_bignum.o stringio.o
